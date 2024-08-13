@@ -14,12 +14,6 @@ public class CRUDOperations {
     @Autowired
     MongoRepo mongoRepo;
 
-    public Integer getNextId() {
-        // Retrieve the last used ID or generate the next ID manually
-        Employee lastEmployee = mongoRepo.findTopByOrderByIdDesc();
-        return lastEmployee != null ? lastEmployee.getId() + 1 : 1;
-    }
-
 
     @GetMapping("/getAll")
     public List<Employee> get()
@@ -30,9 +24,7 @@ public class CRUDOperations {
     @PostMapping("/create")
     public Employee post(@RequestBody Employee employee)
     {
-//        employee.setId(getNextId());
         return mongoRepo.save(employee);
-
     }
 
 }
